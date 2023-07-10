@@ -1,34 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Assignment
 
-## Getting Started
+## Project Assignment: Building a Task Management Application
 
-First, run the development server:
+## Objective:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+The objective of this project assignment is to assess your skills and proficiency in Next.js, TypeScript, Tailwind CSS, MST (Mobx State Tree) and Git. You will be required to develop a task management application that allows users to create, view, update, and delete tasks. The application should incorporate the specified technologies and adhere to best practices in terms of code organization, styling, and version control.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Time Limit: 7 days
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Requirements:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Technology Stack:
 
-## Learn More
+- [x] Next.js: Use Next.js as the framework for building the application.
+- [x] TypeScript: Write the codebase in TypeScript to ensure type safety and improve maintainability.
+- [x] Tailwind CSS: Utilize Tailwind CSS for styling and layout purposes.
+- [ ] MST: Utilize MST for state management and local store.
+- [x] Git: Use Git for version control and provide a Git repository with your project.
 
-To learn more about Next.js, take a look at the following resources:
+2. User Interface:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Create a user interface that allows users to perform the following actions:
+  - [ ] View a list of tasks.
+  - [ ] Add a new task.
+  - [ ] Edit an existing task.
+  - [ ] Delete a task.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Task Management Functionality:
 
-## Deploy on Vercel
+- Each task should have the following properties:
+  - [ ] Title: A brief title describing the task.
+  - [ ] Description: A detailed description of the task.
+  - [ ] Status: The current status of the task (e.g., "To Do," "In Progress," "Completed").
+- [ ] Implement the necessary functionality to perform CRUD (Create, Read, Update, Delete) operations on tasks.
+- [ ] Persist the task data using local storage or a mock API (backend integration is not required for this project).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Code Structure and Best Practices:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Organize your codebase in a modular and maintainable manner.
+- Follow best practices for code organization and project structure.
+- Ensure code readability and maintainability through proper naming conventions, comments (where necessary), and code formatting.
+- Implement error handling and validation as appropriate.
+
+5. Git Version Control:
+
+- Initialize a Git repository for the project and commit your changes at appropriate milestones.
+- Demonstrate your understanding of Git by using branches, commits, and pull requests.
+- Submit the project by providing a link to the Git repository.
+
+## Submission Guidelines:
+
+1. Commit your code regularly, with clear and descriptive commit messages.
+2. Deploy the application on <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" title="vercel">vercel.com</a> or any platform of your choice.
+3. Include a README.md file with instructions on how to run the application locally and link to the live website.
+4. Make sure the application runs successfully on a local development server.
+5. Once you have completed the project, submit it at <a href="https://airtable.com/shrjjktmuUoBRT9cC" target="_blank" rel="noopener noreferrer" title="stamurai link">https://airtable.com/shrjjktmuUoBRT9cC</a>
+
+## Evaluation Criteria:
+
+The evaluation of your project assignment will be based on the following criteria:
+
+1. Correct implementation of the specified functionality.
+2. Proper usage of Next.js, TypeScript, Tailwind CSS, MST and Git.
+3. Code organization, structure, and readability.
+4. User interface design and responsiveness.
+5. Adherence to best practices and industry standards.
+6. Clear documentation and instructions in the README.md file.
+
+Note: Feel free to ask any questions if you need clarification on any aspect of the project assignment. Good luck!
