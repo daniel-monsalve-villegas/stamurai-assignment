@@ -4,3 +4,9 @@ export interface ITask {
   description: string
   status: string
 }
+
+export const CATEGORY = {
+  TITLE: 'title',
+  DESCRIPTION: 'description',
+  STATUS: 'status',
+}
