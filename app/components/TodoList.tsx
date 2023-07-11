@@ -1,4 +1,11 @@
-const TodoList = () => {
+import { ITask } from '@/types/tasks'
+import Task from './Task'
+
+interface ToDoListProps {
+  tasks: ITask[]
+}
+
+const TodoList: React.FC<ToDoListProps> = ({ tasks }) => {
   return (
     <div className='flex flex-col'>
       <div className='m-l-5 overflow-x-auto'>
@@ -25,24 +32,9 @@ const TodoList = () => {
                 </tr>
               </thead>
               <tbody className='divide-y divide-black dark:divide-gray-700'>
-                <tr>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-800'>
-                    Task 1
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-800'>
-                    Task description
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-800'>
-                    Done
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-800'>
-                    <button
-                      className='text-red-400 hover:text-red-600'
-                      type='button'>
-                      Edit
-                    </button>
-                  </td>
-                </tr>
+                {tasks.map((task) => (
+                  <Task key={task.id} task={task} />
+                ))}
               </tbody>
             </table>
           </div>
