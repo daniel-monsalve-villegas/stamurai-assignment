@@ -5,7 +5,7 @@ import { CATEGORY, ITask } from '@/types/tasks'
 import { ChangeEventHandler, FormEventHandler, useState } from 'react'
 import { LiaEdit, LiaTrashAltSolid } from 'react-icons/lia'
 import { AiOutlineSave } from 'react-icons/ai'
-import { editToDo } from '@/api'
+import { deleteToDo, editToDo } from '@/api'
 import { useRouter } from 'next/navigation'
 
 interface TaskProps {
@@ -43,6 +43,12 @@ const Task: React.FC<TaskProps> = ({ task }) => {
       status: taskToEdit.status!,
     })
     setTaskToEdit({ title: '', description: '', status: '' })
+    setOpenModalEdit(false)
+    router.refresh()
+  }
+
+  const handleDeleteTask = async (id: string) => {
+    await deleteToDo(id)
     setOpenModalEdit(false)
     router.refresh()
   }
@@ -149,7 +155,36 @@ const Task: React.FC<TaskProps> = ({ task }) => {
           cursor='pointer'
           size={28}
           className='text-pink-500'
+          onClick={() => setOpenModalDelete(true)}
         />
+
+        <Modal modalOpen={openModalDelete}>
+          <div className='border-2 border-black p-4'>
+            <h3 className='text-lg whitespace-normal border-2 border-b-black border-t-white border-r-white border-l-white  pb-2 mb-3'>
+              Would you like to delete this Task permanently?
+            </h3>
+            <p className='text-md'>
+              You will be not able to revert this change.
+            </p>
+            <div className='flex items-center justify-between pt-4'>
+              <button
+                onClick={() => handleDeleteTask(task.id)}
+                className='relative inline-block px-4 py-2 font-medium group uppercase'>
+                <span className='absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0'></span>
+                <span className='absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black'></span>
+                <span className='relative text-black group-hover:text-white'>
+                  yes
+                </span>
+              </button>
+              <button
+                type='button'
+                className='font-bold px-2 py-1 text-lg text-black underline underline-offset-4 decoration-4 decoration-blue-500 transition duration-200 ease-out hover:bg-blue-500'
+                onClick={() => setOpenModalDelete(false)}>
+                cancel
+              </button>
+            </div>
+          </div>
+        </Modal>
       </td>
     </tr>
   )

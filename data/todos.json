@@ -1,12 +1,6 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "task 1",
-      "description": "task description",
-      "status": "To Do"
-    },
-    {
       "id": "2",
       "title": "task 2",
       "description": "task description",
@@ -27,18 +21,6 @@
     {
       "id": "3ad74bfb-a356-4a72-bfbe-4d7e3202345b",
       "title": "task 6",
-      "description": "desription task",
-      "status": "To Do"
-    },
-    {
-      "id": "76ed5d89-4db6-45b0-b902-bc2fd82c5537",
-      "title": "task 5",
-      "description": "description task",
-      "status": "To Do"
-    },
-    {
-      "id": "9cf2c0be-aa5f-4822-bcc2-6f276c9b468f",
-      "title": "task 8",
       "description": "description task",
       "status": "To Do"
     }
