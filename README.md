@@ -21,7 +21,7 @@ The objective of this project assignment is to assess your skills and proficienc
 2. User Interface:
 
 - Create a user interface that allows users to perform the following actions:
-  - [ ] View a list of tasks.
+  - [x] View a list of tasks.
   - [ ] Add a new task.
   - [ ] Edit an existing task.
   - [ ] Delete a task.
@@ -29,11 +29,11 @@ The objective of this project assignment is to assess your skills and proficienc
 3. Task Management Functionality:
 
 - Each task should have the following properties:
-  - [ ] Title: A brief title describing the task.
-  - [ ] Description: A detailed description of the task.
-  - [ ] Status: The current status of the task (e.g., "To Do," "In Progress," "Completed").
+  - [x] Title: A brief title describing the task.
+  - [x] Description: A detailed description of the task.
+  - [x] Status: The current status of the task (e.g., "To Do," "In Progress," "Completed").
 - [ ] Implement the necessary functionality to perform CRUD (Create, Read, Update, Delete) operations on tasks.
-- [ ] Persist the task data using local storage or a mock API (backend integration is not required for this project).
+- [x] Persist the task data using local storage or a mock API (backend integration is not required for this project).
 
 4. Code Structure and Best Practices:
 
