@@ -23,8 +23,8 @@ The objective of this project assignment is to assess your skills and proficienc
 - Create a user interface that allows users to perform the following actions:
   - [x] View a list of tasks.
   - [x] Add a new task.
-  - [ ] Edit an existing task.
-  - [ ] Delete a task.
+  - [x] Edit an existing task.
+  - [x] Delete a task.
 
 3. Task Management Functionality:
 
