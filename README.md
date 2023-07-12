@@ -44,8 +44,8 @@ The objective of this project assignment is to assess your skills and proficienc
 
 5. Git Version Control:
 
-- Initialize a Git repository for the project and commit your changes at appropriate milestones.
-- Demonstrate your understanding of Git by using branches, commits, and pull requests.
+- [x] Initialize a Git repository for the project and commit your changes at appropriate milestones.
+- [x] Demonstrate your understanding of Git by using branches, commits, and pull requests.
 - Submit the project by providing a link to the Git repository.
 
 ## Submission Guidelines:

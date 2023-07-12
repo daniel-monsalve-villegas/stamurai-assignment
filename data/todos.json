@@ -2,9 +2,9 @@
   "tasks": [
     {
       "id": "2",
-      "title": "task 2",
-      "description": "task description",
-      "status": "In Progress"
+      "title": "task 1",
+      "description": "task description 1",
+      "status": "To Do"
     },
     {
       "id": "3",
@@ -16,12 +16,6 @@
       "id": "bf2322ff-c8b4-4ff4-be3f-dec0efa231f2",
       "title": "task 4",
       "description": "task description",
-      "status": "In Progress"
-    },
-    {
-      "id": "3ad74bfb-a356-4a72-bfbe-4d7e3202345b",
-      "title": "task 6",
-      "description": "description task",
       "status": "To Do"
     }
   ]
