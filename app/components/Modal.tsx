@@ -22,7 +22,7 @@ const Modal: React.FC<ModalProps> = ({
   handleSubmitTask,
   task,
 }) => {
-  const [taskValue, setTaskValue] = useState<Partial<ITask>>(() => {
+  const [taskValue] = useState<Partial<ITask>>(() => {
     if (handleSubmitTask === 'editTask') {
       return {
         title: task?.title,
@@ -39,10 +39,13 @@ const Modal: React.FC<ModalProps> = ({
     HTMLInputElement | HTMLSelectElement
   > = (event) => {
     event.preventDefault()
-    setTaskValue({
-      ...taskValue,
-      [event.target.name]: event.target.value,
-    })
+    if (event.target.name === 'title') {
+      store.todo.title = event.target.value
+    } else if (event.target.name === 'description') {
+      store.todo.description = event.target.value
+    } else {
+      store.todo.status = event.target.value
+    }
   }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -50,9 +53,9 @@ const Modal: React.FC<ModalProps> = ({
     if (handleSubmitTask === 'newTask') {
       await store.createTodo({
         id: uuidv4(),
-        title: taskValue.title!,
-        description: taskValue.description!,
-        status: taskValue.status! || 'To Do',
+        title: store.todo.title,
+        description: store.todo.description,
+        status: store.todo.status || 'To Do',
       })
     } else if (handleSubmitTask === 'editTask') {
       await editToDo({
@@ -62,7 +65,7 @@ const Modal: React.FC<ModalProps> = ({
         status: taskValue.status!,
       })
     }
-    setTaskValue({ title: '', description: '', status: 'To Do' })
+    store.todo = store.resetTodo()
     setModalOpen(false)
     router.refresh()
   }
@@ -89,7 +92,8 @@ const Modal: React.FC<ModalProps> = ({
               id='title'
               type='text'
               name='title'
-              value={taskValue.title}
+              /* value={taskValue.title} */
+              value={store.todo.title}
               onChange={handleInputChange}
               className='appearance-none border border-black w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
               placeholder='New Task'
@@ -108,7 +112,7 @@ const Modal: React.FC<ModalProps> = ({
               id='description'
               type='text'
               name='description'
-              value={taskValue.description}
+              value={store.todo.description}
               onChange={handleInputChange}
               className='appearance-none border border-black w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
               placeholder='Adding task to solve later'
@@ -126,7 +130,7 @@ const Modal: React.FC<ModalProps> = ({
             <select
               id='status'
               name='status'
-              value={taskValue.status }
+              value={store.todo.status}
               onChange={handleInputChange}
               className='appearance-none bg-white border border-black w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
               required>
