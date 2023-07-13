@@ -3,7 +3,7 @@ import Task from './Task'
 import store from '@/store/TodoStore'
 
 const TodoList: React.FC = async () => {
-  const tasks = await store.getTodos()
+  const tasks = await store.fetchTodos()
 
   return (
     <div className='flex flex-col'>

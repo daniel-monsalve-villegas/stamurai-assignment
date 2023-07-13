@@ -1,7 +1,9 @@
 'use client'
 
-import { addToDo, editToDo } from '@/api'
+import { editToDo } from '@/store/TodoAPI'
+import store from '@/store/TodoStore'
 import { CATEGORY, ITask } from '@/types/tasks'
+import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/navigation'
 import { ChangeEventHandler, FormEventHandler, useState } from 'react'
 import { AiOutlineSave } from 'react-icons/ai'
@@ -46,11 +48,11 @@ const Modal: React.FC<ModalProps> = ({
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
     if (handleSubmitTask === 'newTask') {
-      await addToDo({
+      await store.createTodo({
         id: uuidv4(),
         title: taskValue.title!,
         description: taskValue.description!,
-        status: taskValue.status!,
+        status: taskValue.status! || 'To Do',
       })
     } else if (handleSubmitTask === 'editTask') {
       await editToDo({
@@ -60,7 +62,7 @@ const Modal: React.FC<ModalProps> = ({
         status: taskValue.status!,
       })
     }
-    setTaskValue({ title: '', description: '', status: '' })
+    setTaskValue({ title: '', description: '', status: 'To Do' })
     setModalOpen(false)
     router.refresh()
   }
@@ -124,7 +126,7 @@ const Modal: React.FC<ModalProps> = ({
             <select
               id='status'
               name='status'
-              defaultValue={taskValue.status}
+              value={taskValue.status }
               onChange={handleInputChange}
               className='appearance-none bg-white border border-black w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
               required>
@@ -155,4 +157,4 @@ const Modal: React.FC<ModalProps> = ({
   )
 }
 
-export default Modal
+export default observer(Modal)

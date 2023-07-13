@@ -1,32 +1,58 @@
-import { getAllToDos } from '@/api'
+import { addToDo, getAllToDos } from './TodoAPI'
 import { ITask } from '@/types/tasks'
-import { makeObservable, observable, runInAction } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
+import { v4 as uuidv4 } from 'uuid'
 
 class TodoStore {
   todoList: ITask[] = []
-  status: any = 'initial'
+  todo: ITask = this.resetTodo()
+  state: string = 'pending'
+
+  resetTodo() {
+    return {
+      id: uuidv4(),
+      title: '',
+      description: '',
+      status: 'To Do',
+    }
+  }
 
   constructor() {
-    makeObservable(this, {
-      todoList: observable,
-      status: observable,
-    })
+    makeAutoObservable(this)
   }
 
-  setTodoList(todoList: ITask[]) {
-    this.todoList = todoList
-  }
-
-  getTodos = async (): Promise<ITask[]> => {
+  fetchTodos = async (): Promise<ITask[]> => {
+    this.todoList = []
+    this.state = 'pending'
     try {
       const todos = await getAllToDos()
       runInAction(() => {
         this.todoList = todos
+        this.state = 'done'
       })
       return todos
     } catch (error) {
       runInAction(() => {
-        this.status = error
+        this.state = 'error'
+      })
+      throw error
+    }
+  }
+
+  createTodo = async (todo: ITask): Promise<ITask> => {
+    this.state = 'pending'
+    try {
+      const newTodo = await addToDo(todo)
+      if (newTodo.status === 201) {
+        runInAction(() => {
+          this.todo = this.resetTodo()
+          this.state = 'done'
+        })
+      }
+      return newTodo
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error'
       })
       throw error
     }

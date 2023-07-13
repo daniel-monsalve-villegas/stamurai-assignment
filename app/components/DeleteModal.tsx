@@ -1,4 +1,4 @@
-import { deleteToDo } from '@/api'
+import { deleteToDo } from '@/store/TodoAPI'
 import { ITask } from '@/types/tasks'
 import { useRouter } from 'next/navigation'
 
