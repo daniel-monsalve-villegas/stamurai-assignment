@@ -1,11 +1,10 @@
-import { ITask } from '@/types/tasks'
+import { CATEGORY } from '@/types/tasks'
 import Task from './Task'
+import store from '@/store/TodoStore'
 
-interface ToDoListProps {
-  tasks: ITask[]
-}
+const TodoList: React.FC = async () => {
+  const tasks = await store.getTodos()
 
-const TodoList: React.FC<ToDoListProps> = ({ tasks }) => {
   return (
     <div className='flex flex-col'>
       <div className='m-l-5 overflow-x-auto'>
@@ -17,17 +16,17 @@ const TodoList: React.FC<ToDoListProps> = ({ tasks }) => {
                   <th
                     scope='col'
                     className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase'>
-                    Title
+                    {CATEGORY.TITLE}
                   </th>
                   <th
                     scope='col'
                     className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase'>
-                    Description
+                    {CATEGORY.DESCRIPTION}
                   </th>
                   <th
                     scope='col'
                     className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase'>
-                    Status
+                    {CATEGORY.STATUS}
                   </th>
                 </tr>
               </thead>

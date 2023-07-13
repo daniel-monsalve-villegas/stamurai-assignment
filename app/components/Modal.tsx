@@ -11,7 +11,7 @@ interface ModalProps {
   modalOpen: boolean
   setModalOpen: (open: boolean) => boolean | void
   handleSubmitTask: string
-  task: ITask
+  task?: ITask
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -23,9 +23,9 @@ const Modal: React.FC<ModalProps> = ({
   const [taskValue, setTaskValue] = useState<Partial<ITask>>(() => {
     if (handleSubmitTask === 'editTask') {
       return {
-        title: task.title,
-        description: task.description,
-        status: task.status,
+        title: task?.title,
+        description: task?.description,
+        status: task?.status,
       }
     } else {
       return {}
@@ -54,7 +54,7 @@ const Modal: React.FC<ModalProps> = ({
       })
     } else if (handleSubmitTask === 'editTask') {
       await editToDo({
-        id: task.id,
+        id: task?.id || uuidv4(),
         title: taskValue.title!,
         description: taskValue.description!,
         status: taskValue.status!,

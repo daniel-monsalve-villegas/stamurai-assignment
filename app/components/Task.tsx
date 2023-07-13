@@ -5,6 +5,7 @@ import { ITask } from '@/types/tasks'
 import { useState } from 'react'
 import { LiaEdit, LiaTrashAltSolid } from 'react-icons/lia'
 import DeleteModal from './DeleteModal'
+import { observer } from 'mobx-react-lite'
 
 interface TaskProps {
   task: ITask
@@ -58,4 +59,4 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   )
 }
 
-export default Task
+export default observer(Task)
