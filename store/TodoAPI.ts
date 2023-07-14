@@ -1,6 +1,6 @@
 import { ITask } from '@/types/tasks'
 
-const baseUrl = 'http://localhost:8080'
+const baseUrl = 'https://64b0fb06062767bc4825709a.mockapi.io'
 
 export const getAllToDos = async (): Promise<ITask[]> => {
   try {

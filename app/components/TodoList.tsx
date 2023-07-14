@@ -2,11 +2,11 @@ import { CATEGORY } from '@/types/tasks'
 import Task from './Task'
 import store from '@/store/TodoStore'
 
-const TodoList: React.FC = async () => {
+const TodoList = async () => {
   const tasks = await store.fetchTodos()
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col '>
       <div className='m-l-5 overflow-x-auto'>
         <div className='p-l-5 min-w-full inline-block align-middle'>
           <div className='overflow-hidden'>
