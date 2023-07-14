@@ -15,25 +15,25 @@ The objective of this project assignment is to assess your skills and proficienc
 - [x] Next.js: Use Next.js as the framework for building the application.
 - [x] TypeScript: Write the codebase in TypeScript to ensure type safety and improve maintainability.
 - [x] Tailwind CSS: Utilize Tailwind CSS for styling and layout purposes.
-- [x] MST: Utilize MST for state management and local store.
+- [ ] MST: Utilize MST for state management and local store.
 - [x] Git: Use Git for version control and provide a Git repository with your project.
 
 2. User Interface:
 
 - Create a user interface that allows users to perform the following actions:
-  - [x] View a list of tasks.
-  - [x] Add a new task.
-  - [x] Edit an existing task.
-  - [x] Delete a task.
+  - [ ] View a list of tasks.
+  - [ ] Add a new task.
+  - [ ] Edit an existing task.
+  - [ ] Delete a task.
 
 3. Task Management Functionality:
 
 - Each task should have the following properties:
-  - [x] Title: A brief title describing the task.
-  - [x] Description: A detailed description of the task.
-  - [x] Status: The current status of the task (e.g., "To Do," "In Progress," "Completed").
-- [x] Implement the necessary functionality to perform CRUD (Create, Read, Update, Delete) operations on tasks.
-- [x] Persist the task data using local storage or a mock API (backend integration is not required for this project).
+  - [ ] Title: A brief title describing the task.
+  - [ ] Description: A detailed description of the task.
+  - [ ] Status: The current status of the task (e.g., "To Do," "In Progress," "Completed").
+- [ ] Implement the necessary functionality to perform CRUD (Create, Read, Update, Delete) operations on tasks.
+- [ ] Persist the task data using local storage or a mock API (backend integration is not required for this project).
 
 4. Code Structure and Best Practices:
 
@@ -44,8 +44,8 @@ The objective of this project assignment is to assess your skills and proficienc
 
 5. Git Version Control:
 
-- [x] Initialize a Git repository for the project and commit your changes at appropriate milestones.
-- [x] Demonstrate your understanding of Git by using branches, commits, and pull requests.
+- Initialize a Git repository for the project and commit your changes at appropriate milestones.
+- Demonstrate your understanding of Git by using branches, commits, and pull requests.
 - Submit the project by providing a link to the Git repository.
 
 ## Submission Guidelines:
