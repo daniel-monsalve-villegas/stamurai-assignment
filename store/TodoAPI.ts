@@ -15,6 +15,19 @@ export const getAllToDos = async (): Promise<ITask[]> => {
   }
 }
 
+export const getToDo = async (id: string): Promise<ITask> => {
+  try {
+    const response = await fetch(`${baseUrl}/tasks/${id}`)
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`)
+    }
+    const todo = await response.json()
+    return todo
+  } catch (error: any) {
+    throw new Error(error)
+  }
+}
+
 export const addToDo = async (todo: ITask): Promise<ITask> => {
   try {
     const response = await fetch(`${baseUrl}/tasks`, {

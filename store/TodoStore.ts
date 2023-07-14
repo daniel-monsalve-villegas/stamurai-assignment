@@ -1,4 +1,4 @@
-import { addToDo, getAllToDos } from './TodoAPI'
+import { addToDo, getAllToDos, getToDo } from './TodoAPI'
 import { ITask } from '@/types/tasks'
 import { makeAutoObservable, runInAction } from 'mobx'
 import { v4 as uuidv4 } from 'uuid'
@@ -39,10 +39,27 @@ class TodoStore {
     }
   }
 
-  createTodo = async (todo: ITask): Promise<ITask> => {
+  fetchTodo = async (todoRcv: ITask): Promise<ITask> => {
     this.state = 'pending'
     try {
-      const newTodo = await addToDo(todo)
+      const todoFetch = await getToDo(todoRcv.id)
+      runInAction(() => {
+        this.todo = todoFetch
+        this.state = 'done'
+      })
+      return todoFetch
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error'
+      })
+      throw error
+    }
+  }
+
+  createTodo = async (todoRcv: ITask): Promise<ITask> => {
+    this.state = 'pending'
+    try {
+      const newTodo = await addToDo(todoRcv)
       if (newTodo.status === 201) {
         runInAction(() => {
           this.todo = this.resetTodo()

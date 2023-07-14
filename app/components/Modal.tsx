@@ -1,11 +1,9 @@
-'use client'
-
 import { editToDo } from '@/store/TodoAPI'
 import store from '@/store/TodoStore'
-import { CATEGORY, ITask } from '@/types/tasks'
+import { CATEGORY } from '@/types/tasks'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/navigation'
-import { ChangeEventHandler, FormEventHandler, useState } from 'react'
+import { ChangeEventHandler, FormEventHandler } from 'react'
 import { AiOutlineSave } from 'react-icons/ai'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -13,26 +11,13 @@ interface ModalProps {
   modalOpen: boolean
   setModalOpen: (open: boolean) => boolean | void
   handleSubmitTask: string
-  task?: ITask
 }
 
 const Modal: React.FC<ModalProps> = ({
   modalOpen,
   setModalOpen,
   handleSubmitTask,
-  task,
 }) => {
-  const [taskValue] = useState<Partial<ITask>>(() => {
-    if (handleSubmitTask === 'editTask') {
-      return {
-        title: task?.title,
-        description: task?.description,
-        status: task?.status,
-      }
-    } else {
-      return {}
-    }
-  })
   const router = useRouter()
 
   const handleInputChange: ChangeEventHandler<
@@ -59,10 +44,10 @@ const Modal: React.FC<ModalProps> = ({
       })
     } else if (handleSubmitTask === 'editTask') {
       await editToDo({
-        id: task?.id || uuidv4(),
-        title: taskValue.title!,
-        description: taskValue.description!,
-        status: taskValue.status!,
+        id: store.todo.id || uuidv4(),
+        title: store.todo.title!,
+        description: store.todo.description!,
+        status: store.todo.status!,
       })
     }
     store.todo = store.resetTodo()
@@ -92,7 +77,6 @@ const Modal: React.FC<ModalProps> = ({
               id='title'
               type='text'
               name='title'
-              /* value={taskValue.title} */
               value={store.todo.title}
               onChange={handleInputChange}
               className='appearance-none border border-black w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline'
