@@ -1,3 +1,4 @@
+import modalStore from '@/store/ModalStore'
 import store from '@/store/TodoStore'
 import { CATEGORY } from '@/types/tasks'
 import { observer } from 'mobx-react-lite'
@@ -6,17 +7,7 @@ import { ChangeEventHandler, FormEventHandler } from 'react'
 import { AiOutlineSave } from 'react-icons/ai'
 import { v4 as uuidv4 } from 'uuid'
 
-interface ModalProps {
-  modalOpen: boolean
-  setModalOpen: (open: boolean) => boolean | void
-  handleSubmitTask: string
-}
-
-const Modal: React.FC<ModalProps> = ({
-  modalOpen,
-  setModalOpen,
-  handleSubmitTask,
-}) => {
+const Modal: React.FC = () => {
   const router = useRouter()
 
   const handleInputChange: ChangeEventHandler<
@@ -34,40 +25,41 @@ const Modal: React.FC<ModalProps> = ({
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
-    if (handleSubmitTask === 'newTask') {
+    if (modalStore.typeModal === 'newTask') {
       await store.createTodo({
         id: uuidv4(),
         title: store.todo.title,
         description: store.todo.description,
         status: store.todo.status || 'To Do',
       })
-    } else if (handleSubmitTask === 'editTask') {
+    } else if (modalStore.typeModal === 'editTask') {
       await store.updateTodo({
         id: store.todo.id || uuidv4(),
         title: store.todo.title!,
         description: store.todo.description!,
         status: store.todo.status!,
       })
-    } else if (handleSubmitTask === 'deleteTask') {
+    } else if (modalStore.typeModal === 'deleteTask') {
       await store.removeTodo(store.todo.id)
     }
     store.todo = store.resetTodo()
-    setModalOpen(false)
+    modalStore.openModal = false
     router.refresh()
   }
 
   return (
+    <>
     <div
       className={`${
-        modalOpen
-          ? 'absolute top-0 left-0 flex items-center w-full h-full backdrop-blur bg-white/30'
+        modalStore.openModal
+          ? 'absolute top-0 left-0 flex items-center w-full h-full backdrop-blur'
           : 'd-none'
       }`}>
-      <dialog open={modalOpen} className='w-full max-w-sm'>
+      <dialog open={modalStore.openModal} className='w-full max-w-sm'>
         <form
           className='border-2 border-black dark:border-white px-8 pt-6 pb-8 mb-4'
           onSubmit={handleSubmit}>
-          {handleSubmitTask === 'deleteTask' ? (
+          {modalStore.typeModal === 'deleteTask' ? (
             <div>
               <h3 className='text-lg whitespace-normal border-2 border-b-black border-t-white border-r-white border-l-white  pb-2 mb-3'>
                 Would you like to delete this Task permanently?
@@ -86,7 +78,7 @@ const Modal: React.FC<ModalProps> = ({
                 <button
                   type='button'
                   className='font-bold px-2 py-1 text-lg text-black underline underline-offset-4 decoration-4 decoration-blue-500 transition duration-200 ease-out hover:bg-blue-500'
-                  onClick={() => setModalOpen(false)}>
+                  onClick={() => (modalStore.openModal = false)}>
                   cancel
                 </button>
               </div>
@@ -155,7 +147,7 @@ const Modal: React.FC<ModalProps> = ({
                   <span className='absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0'></span>
                   <span className='absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black'></span>
                   <span className='relative text-black group-hover:text-white'>
-                    {handleSubmitTask === 'editTask'
+                    {modalStore.typeModal === 'editTask'
                       ? 'edit task'
                       : 'save task'}
                     <AiOutlineSave className='ml-2 inline' size={22} />
@@ -164,7 +156,7 @@ const Modal: React.FC<ModalProps> = ({
                 <button
                   type='button'
                   className='font-bold px-2 py-1 text-lg text-black underline underline-offset-4 decoration-4 decoration-blue-500 transition duration-200 ease-out hover:bg-blue-500'
-                  onClick={() => setModalOpen(false)}>
+                  onClick={() => (modalStore.openModal = false)}>
                   close
                 </button>
               </div>
@@ -173,6 +165,7 @@ const Modal: React.FC<ModalProps> = ({
         </form>
       </dialog>
     </div>
+    </>
   )
 }
 

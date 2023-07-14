@@ -2,17 +2,17 @@
 
 import store from '@/store/TodoStore'
 import Modal from './Modal'
-import { MouseEventHandler, useState } from 'react'
+import { MouseEventHandler } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { observer } from 'mobx-react-lite'
+import modalStore from '@/store/ModalStore'
 
 const AddTask = () => {
-  const [modalOpen, setModalOpen] = useState<boolean>(false)
-
   const handleAddClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault()
     store.todo = store.resetTodo()
-    setModalOpen(true)
+    modalStore.openModal = true
+    modalStore.typeModal = 'newTask'
   }
 
   return (
@@ -28,11 +28,7 @@ const AddTask = () => {
         </span>
       </button>
 
-      <Modal
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-        handleSubmitTask='newTask'
-      />
+      <Modal />
     </div>
   )
 }

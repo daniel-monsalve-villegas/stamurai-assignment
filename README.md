@@ -15,7 +15,7 @@ The objective of this project assignment is to assess your skills and proficienc
 - [x] Next.js: Use Next.js as the framework for building the application.
 - [x] TypeScript: Write the codebase in TypeScript to ensure type safety and improve maintainability.
 - [x] Tailwind CSS: Utilize Tailwind CSS for styling and layout purposes.
-- [ ] MST: Utilize MST for state management and local store.
+- [x] MST: Utilize MST for state management and local store.
 - [x] Git: Use Git for version control and provide a Git repository with your project.
 
 2. User Interface:
@@ -32,7 +32,7 @@ The objective of this project assignment is to assess your skills and proficienc
   - [x] Title: A brief title describing the task.
   - [x] Description: A detailed description of the task.
   - [x] Status: The current status of the task (e.g., "To Do," "In Progress," "Completed").
-- [ ] Implement the necessary functionality to perform CRUD (Create, Read, Update, Delete) operations on tasks.
+- [x] Implement the necessary functionality to perform CRUD (Create, Read, Update, Delete) operations on tasks.
 - [x] Persist the task data using local storage or a mock API (backend integration is not required for this project).
 
 4. Code Structure and Best Practices:
