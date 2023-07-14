@@ -50,7 +50,7 @@ export const addToDo = async (todo: ITask): Promise<ITask> => {
 export const editToDo = async (todo: ITask): Promise<ITask> => {
   try {
     const response = await fetch(`${baseUrl}/tasks/${todo.id}`, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
