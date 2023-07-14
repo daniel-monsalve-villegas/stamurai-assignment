@@ -1,4 +1,4 @@
-import { ITask } from './types/tasks'
+import { ITask } from '@/types/tasks'
 
 const baseUrl = 'http://localhost:8080'
 
@@ -37,7 +37,7 @@ export const addToDo = async (todo: ITask): Promise<ITask> => {
       },
       body: JSON.stringify(todo),
     })
-    if (!response.ok) {
+    if (response.status !== 201) {
       throw new Error(`Error! status: ${response.status}`)
     }
     const newToDo = await response.json()
@@ -48,19 +48,33 @@ export const addToDo = async (todo: ITask): Promise<ITask> => {
 }
 
 export const editToDo = async (todo: ITask): Promise<ITask> => {
-  const response = await fetch(`${baseUrl}/tasks/${todo.id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(todo),
-  })
-  const updatedToDo = await response.json()
-  return updatedToDo
+  try {
+    const response = await fetch(`${baseUrl}/tasks/${todo.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todo),
+    })
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`)
+    }
+    const updatedToDo = await response.json()
+    return updatedToDo
+  } catch (error: any) {
+    throw new Error(error)
+  }
 }
 
 export const deleteToDo = async (id: string): Promise<void> => {
-  await fetch(`${baseUrl}/tasks/${id}`, {
-    method: 'DELETE',
-  })
+  try {
+    const response = await fetch(`${baseUrl}/tasks/${id}`, {
+      method: 'DELETE',
+    })
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`)
+    }
+  } catch (error: any) {
+    throw new Error(error)
+  }
 }

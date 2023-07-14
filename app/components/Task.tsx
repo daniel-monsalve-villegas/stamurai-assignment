@@ -4,7 +4,6 @@ import Modal from './Modal'
 import { ITask } from '@/types/tasks'
 import { MouseEventHandler, useState } from 'react'
 import { LiaEdit, LiaTrashAltSolid } from 'react-icons/lia'
-import DeleteModal from './DeleteModal'
 import { observer } from 'mobx-react-lite'
 import store from '@/store/TodoStore'
 
@@ -16,7 +15,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [openModalDelete, setOpenModalDelete] = useState<boolean>(false)
 
-  const handleEditClick: MouseEventHandler<SVGElement> = async (
+  const handleClick: MouseEventHandler<SVGElement> = async (
     event
   ): Promise<void> => {
     event.preventDefault()
@@ -38,29 +37,31 @@ const Task: React.FC<TaskProps> = ({ task }) => {
         {task.status}
       </td>
 
-      <td className='flex gap-1 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-800'>
+      <td className='pl-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-800'>
         <LiaEdit
-          onClick={handleEditClick}
           cursor='pointer'
           size={28}
           className='text-sky-500'
+          onClick={handleClick}
         />
         <Modal
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           handleSubmitTask='editTask'
         />
+      </td>
 
+      <td className='pl-2 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-800'>
         <LiaTrashAltSolid
           cursor='pointer'
           size={28}
           className='text-pink-500'
-          onClick={() => setOpenModalDelete(true)}
+          onClick={handleClick}
         />
-        <DeleteModal
-          modalOpen={openModalDelete}
-          setModalOpen={setOpenModalDelete}
-          task={task}
+        <Modal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          handleSubmitTask='deleteTask'
         />
       </td>
     </tr>

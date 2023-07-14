@@ -1,4 +1,4 @@
-import { addToDo, getAllToDos, getToDo } from './TodoAPI'
+import { addToDo, deleteToDo, editToDo, getAllToDos, getToDo } from './TodoAPI'
 import { ITask } from '@/types/tasks'
 import { makeAutoObservable, runInAction } from 'mobx'
 import { v4 as uuidv4 } from 'uuid'
@@ -60,13 +60,45 @@ class TodoStore {
     this.state = 'pending'
     try {
       const newTodo = await addToDo(todoRcv)
-      if (newTodo.status === 201) {
-        runInAction(() => {
-          this.todo = this.resetTodo()
-          this.state = 'done'
-        })
-      }
+      runInAction(() => {
+        this.todo = this.resetTodo()
+        this.state = 'done'
+      })
       return newTodo
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error'
+      })
+      throw error
+    }
+  }
+
+  updateTodo = async (todoRcv: ITask): Promise<ITask> => {
+    this.state = 'pending'
+    try {
+      const updatedTodo = await editToDo(todoRcv)
+      runInAction(() => {
+        this.todo = this.resetTodo()
+        this.state = 'done'
+      })
+      return updatedTodo
+    } catch (error) {
+      runInAction(() => {
+        this.state = 'error'
+      })
+      throw error
+    }
+  }
+
+  removeTodo = async (id: string): Promise<void> => {
+    this.state = 'pending'
+    try {
+      const removedTodo = await deleteToDo(id)
+      runInAction(() => {
+        this.todo = this.resetTodo()
+        this.state = 'done'
+      })
+      return removedTodo
     } catch (error) {
       runInAction(() => {
         this.state = 'error'
